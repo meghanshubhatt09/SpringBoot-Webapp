@@ -1,6 +1,7 @@
 package com.webservices.cloudwebapp.webapp.restController;
 
 import com.timgroup.statsd.StatsDClient;
+import io.github.pixee.security.Filenames;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.webservices.cloudwebapp.webapp.model.Document;
@@ -207,7 +208,7 @@ public class DocumentController {
             LOGGER.info("Document Failed Uploaded");
             return new ResponseEntity("No Auth in GET", HttpStatus.UNAUTHORIZED);
         }
-        String fileNameEdited =  file.getOriginalFilename() + "-" + System.currentTimeMillis();
+        String fileNameEdited =  Filenames.toSimpleFileName(file.getOriginalFilename()) + "-" + System.currentTimeMillis();
         String loggedUser = logged.split(" ")[0];
         String password = logged.split(" ")[1];
         User user = userRepository.findUserByUsername(loggedUser);
