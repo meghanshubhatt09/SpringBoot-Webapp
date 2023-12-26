@@ -20,7 +20,7 @@ public class AppStatus {
 
     @Autowired
     private StatsDClient metricsClient;
-    @RequestMapping(value="/healthz", method = RequestMethod.GET)
+    @GetMapping(value="/healthz")
     public ResponseEntity heathCheck(){
         long startTime = System.currentTimeMillis();
         metricsClient.recordExecutionTime("endpoint.healthz.http.GET",startTime);
